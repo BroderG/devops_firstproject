@@ -13,6 +13,7 @@ pipeline {
         }
         stage('Backend testing') {
             steps {
+                bat 'pip install requests'
                 bat 'python backend_testing.py'
             }
         }
