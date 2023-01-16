@@ -1,7 +1,7 @@
 # Web facing app of project
 
-# Libraries: flask
-
+# Libraries: flask, os, signal
+import os, signal
 from flask import Flask
 from db_connector import get_name
 
@@ -18,6 +18,10 @@ def get_user_name(user_id):
     else:
         return "<H1 id='user'>" + str(get_name(user_id)) + "</H1>", 200
 
+@app.route('/stop_server')
+def stop_server():
+    os.kill(osgetpid(), signal.CTRL_C_EVENT)
+    return 'Server stopped'
 
 # host is pointing at local machine address
 # debug is used for more detailed logs + hot swaping
