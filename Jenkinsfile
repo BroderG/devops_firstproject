@@ -1,6 +1,14 @@
 pipeline {
     agent any
     stages {
+        stage('install packages') {
+            steps {
+                bat 'pip install requests'
+                bat 'pip install pymysql'
+                bat 'pip install json'
+                bat 'pip install time'
+            }
+        }
         stage('run backend server') {
             steps {
                 bat 'start /min python rest_app.py'
@@ -13,7 +21,6 @@ pipeline {
         }
         stage('Backend testing') {
             steps {
-                bat 'pip install requests'
                 bat 'python backend_testing.py'
             }
         }
