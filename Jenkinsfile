@@ -5,7 +5,6 @@ pipeline {
             steps {
                 bat 'pip install requests'
                 bat 'pip install pymysql'
-                bat 'pip install json'
                 bat 'pip install time'
             }
         }
