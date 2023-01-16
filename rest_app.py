@@ -1,13 +1,17 @@
 # Backend facing app of project
 
-# Libraries: flask, request
-
+# Libraries: flask, request, os, signal
+import os, signal
 from flask import Flask, request
 from db_connector import add_user, get_name, update_user, delete_user
 # import json
 
 app = Flask(__name__)
 
+@app.route('/stop_server')
+def stop_server():
+    os.kill(osgetpid(), signal.CTRL_C_EVENT)
+    return 'Server stopped'
 
 # supported methods receive user_id in url + json payload
 @app.route('/users/<user_id>', methods=['GET', 'POST', 'DELETE', 'PUT'])
