@@ -40,7 +40,7 @@ def user(user_id):
             return {'status': 'ok', 'user_added': user_name}, 200  # status code
         # If above condition is not met, return status error and the replacement ID the user_name has gotten + generic error html status code
         else:
-            return {'status': 'error', 'reason:': 'ID already exists, instead assigned to ID: ' +str(tmpid)}, 500  # status code
+            return {'status': 'error', 'reason:': 'ID already exists, instead assigned to different ID', 'ID': str(tmpid)}, 500  # status code
 
     # Put method to update a username by ID
     elif request.method == 'PUT':
