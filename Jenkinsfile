@@ -33,10 +33,10 @@ pipeline {
         }
     }
         post{
-         always{
+         failure{
          mail to: "broder.guy@gmail.com",
-         subject: "Test Jenkins Email",
-         body: "Test"
+         subject: "Jenkins failed pipeline test",
+         body: "Jenkins failed pipeline test"
          }
      }
 }
