@@ -31,12 +31,12 @@ pipeline {
                 bat 'python clean_environment.py'
             }
         }
-    post{
+    }
+        post{
          always{
          mail to: "broder.guy@gmail.com",
          subject: "Test Jenkins Email",
          body: "Test"
          }
      }
-    }
 }
