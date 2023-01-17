@@ -23,6 +23,11 @@ def stop_server():
     os.kill(osgetpid(), signal.CTRL_C_EVENT)
     return 'Server stopped'
 
+# Error handler for route not found
+@app.errorhandler(404)
+def invalid_route(e):
+    return {'status': 'error', 'reason': 'Route does not exist'}, 404
+
 # host is pointing at local machine address
 # debug is used for more detailed logs + hot swaping
 # the desired port - feel free to change

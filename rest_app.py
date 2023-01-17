@@ -13,6 +13,11 @@ def stop_server():
     os.kill(osgetpid(), signal.CTRL_C_EVENT)
     return 'Server stopped'
 
+# Error handler for route not found
+@app.errorhandler(404)
+def invalid_route(e):
+    return {'status': 'error', 'reason': 'Route does not exist'}, 404
+
 # supported methods receive user_id in url + json payload
 @app.route('/users/<user_id>', methods=['GET', 'POST', 'DELETE', 'PUT'])
 def user(user_id):
