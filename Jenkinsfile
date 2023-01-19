@@ -20,7 +20,9 @@ pipeline {
         }
         stage('Backend testing') {
             steps {
-                bat 'python backend_testing.py'
+                withCredentials([usernameColonPassword(credentialsId: 'sql_user_pass', variable: 'db_creds')]) {
+                bat 'python backend_testing.py ' + "$db_creds_USR" + ' ' + "$db_creds_PSW"
+                }
             }
         }
         stage('Frontend testing') {
