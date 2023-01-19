@@ -7,7 +7,7 @@ pipeline {
         stage('run backend server') {
             steps {
                 withCredentials([usernameColonPassword(credentialsId: 'sql_user_pass', variable: 'db_creds')]) {
-                bat 'start /min python rest_app.py ' + $db_creds_USR + ' ' + $db_creds_PSW
+                bat 'start /min python rest_app.py ' + "$db_creds_USR" + ' ' + "$db_creds_PSW"
                 }
             }
         }
