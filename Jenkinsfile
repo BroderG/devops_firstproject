@@ -26,7 +26,7 @@ pipeline {
         }
         stage('Combined testing') {
             steps {
-                bat 'python combined_testing.py'
+                bat 'python combined_testing.py "%db_creds_USR%" "%db_creds_PSW%"'
             }
         }
         stage('Clean environment') {

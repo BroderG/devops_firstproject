@@ -1,11 +1,13 @@
 # Backend testing script
 
-# Libraries: requests, json, time, pymsysql, selenium
-import requests, json, time, pymysql
+# Libraries: requests, json, time, pymsysql, selenium, sys
+import requests, json, time, pymysql, sys
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.by import By
 
+user_db = str(sys.argv[1])
+passwd_db = str(sys.argv[2])
 
 # User_name and ID variables to change for testing
 user_name = "johnny"
@@ -26,7 +28,7 @@ tempdict = json.loads(json.dumps(res.json()))
 # Check if both the status code is 200, and user_name from response equals to initial user_name, if so continue test
 if res.status_code == 200 and tempdict["user_name"] == user_name:
     # Establishing a connection to DB
-    conn = pymysql.connect(host='sql.freedb.tech', port=3306, user='freedb_moshez', passwd='BF%SNrp8#c7k4Fs',
+    conn = pymysql.connect(host='sql.freedb.tech', port=3306, user=user_db, passwd=passwd_db,
                                db='freedb_moshe123')
     conn.autocommit(True)
     cursor = conn.cursor()

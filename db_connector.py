@@ -104,7 +104,6 @@ def update_user(user_id, username):
 
 # A function to delete a user from the DB by provided ID
 def delete_user(user_id):
-    # schema_name = 'freedb_moshe123'  # DELETE?
     conn = pymysql.connect(host='sql.freedb.tech', port=3306, user=user_db, passwd=passwd_db, db='freedb_moshe123')
     conn.autocommit(True)
     cursor = conn.cursor()
