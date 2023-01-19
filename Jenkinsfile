@@ -1,15 +1,18 @@
 pipeline {
     agent any
     stages {
-        environment {
-        db_creds = credentials('4cf4078c-4a59-4919-808e-863c9c9eee85')
-        }
         stage('run backend server') {
+            environment {
+                db_creds = credentials('4cf4078c-4a59-4919-808e-863c9c9eee85')
+            }
             steps {
                 bat('start /min python rest_app.py ' + $db_creds_USR + ' ' + $db_creds_PSW)
             }
         }
         stage('run frontend server') {
+            environment {
+                db_creds = credentials('4cf4078c-4a59-4919-808e-863c9c9eee85')
+            }
             steps {
                 bat('start /min python web_app.py ' + $db_creds_USR + ' ' + $db_creds_PSW)
             }
