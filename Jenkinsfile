@@ -6,6 +6,7 @@ pipeline {
     stages {
         stage('run backend server') {
             steps {
+                echo $db_creds_USR
                 bat 'start /min python rest_app.py ' + $db_creds_USR + ' ' + $db_creds_PSW
             }
         }
