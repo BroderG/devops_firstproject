@@ -26,8 +26,7 @@ tempdict = json.loads(json.dumps(res.json()))
 if res.status_code == 200 and tempdict["user_name"] == user_name:
     # schema_name = 'freedb_moshe123'
     # Establishing a connection to DB
-    conn = pymysql.connect(host='sql.freedb.tech', port=3306, user=user, passwd=passwd,
-                               db='freedb_moshe123')
+    conn = pymysql.connect(host='sql.freedb.tech', port=3306, user=user, passwd=passwd, db='freedb_moshe123')
     conn.autocommit(True)
     cursor = conn.cursor()
     # Execute command in DB to retrieve user_name from DB and compare to initial user_name
