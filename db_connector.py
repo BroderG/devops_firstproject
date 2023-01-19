@@ -1,20 +1,21 @@
 # The DB connector with all the functions used by web_app and rest_app
 
-# Libraries: pymysql, datetime
-import pymysql
+# Libraries: pymysql, datetime, sys
+import pymysql, sys
 from datetime import datetime
 
 # Assign the current time to "now" variable
 now = datetime.now()
 
+user = str(sys.argv[1])
+passwd = str(sys.argv[2])
+
 # A function to retrieve the user_name from the DB by it's ID
 def get_name(user_id):
-    # schema_name = 'freedb_moshe123'  # DELETE?
     # Establishing a connection to DB
-    conn = pymysql.connect(host='sql.freedb.tech', port=3306, user='freedb_moshez', passwd='BF%SNrp8#c7k4Fs', db='freedb_moshe123')
+    conn = pymysql.connect(host='sql.freedb.tech', port=3306, user=user, passwd=passwd, db='freedb_moshe123')
     conn.autocommit(True)
     cursor = conn.cursor()
-    # name = []    # DELETE?
     # Execute a statement to place the cursor on the user_name of the ID value given
     cursor.execute("SELECT user_name FROM freedb_moshe123.users WHERE (`user_id` = '"+ str(user_id) +"');")
     # Get one result, cast it to string and assign to variable "result"
@@ -29,7 +30,7 @@ def add_user(user_id, username):
     # Take current time, change to specified format, and assign to variable "creation_date"
     creation_date = now.strftime("%Y-%m-%d %H:%M:%S")
     # Establishing a connection to DB
-    conn = pymysql.connect(host='sql.freedb.tech', port=3306, user='freedb_moshez', passwd='BF%SNrp8#c7k4Fs', db='freedb_moshe123')
+    conn = pymysql.connect(host='sql.freedb.tech', port=3306, user=user, passwd=passwd, db='freedb_moshe123')
     conn.autocommit(True)
     # Getting a cursor from Database
     cursor = conn.cursor()
@@ -73,7 +74,7 @@ def add_user(user_id, username):
 
 # A function to update a user_name to the DB with provided user_name and ID
 def update_user(user_id, username):
-    conn = pymysql.connect(host='sql.freedb.tech', port=3306, user='freedb_moshez', passwd='BF%SNrp8#c7k4Fs', db='freedb_moshe123')
+    conn = pymysql.connect(host='sql.freedb.tech', port=3306, user=user, passwd=passwd, db='freedb_moshe123')
     conn.autocommit(True)
     cursor = conn.cursor()
     # Getting user_id's data from table “users”
@@ -104,7 +105,7 @@ def update_user(user_id, username):
 # A function to delete a user from the DB by provided ID
 def delete_user(user_id):
     # schema_name = 'freedb_moshe123'  # DELETE?
-    conn = pymysql.connect(host='sql.freedb.tech', port=3306, user='freedb_moshez', passwd='BF%SNrp8#c7k4Fs', db='freedb_moshe123')
+    conn = pymysql.connect(host='sql.freedb.tech', port=3306, user=user, passwd=passwd, db='freedb_moshe123')
     conn.autocommit(True)
     cursor = conn.cursor()
     # Getting user_id's data from table “users”

@@ -5,7 +5,6 @@ import os, signal
 from flask import Flask
 from db_connector import get_name
 
-
 app = Flask(__name__)
 
 # Get user name function - receives user_id in url:
