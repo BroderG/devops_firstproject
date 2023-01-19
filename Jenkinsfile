@@ -2,8 +2,8 @@ pipeline {
     agent any
     environment {
         db_creds = credentials('sql_user_pass')
-        db_user = "$db_creds_USR"
-        db_pass = "$db_creds_PSW"
+        db_user = "${env.db_creds_USR}"
+        db_pass = "${env.db_creds_PSW}"
     }
     stages {
         stage('run backend server') {
