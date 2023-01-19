@@ -10,11 +10,6 @@ pipeline {
                 bat 'start /min python rest_app.py ' + ${env.db_creds_USR} + ' ' + ${env.db_creds_PSW}
             }
         }
-        stage('run frontend server') {
-            steps {
-                bat 'start /min python web_app.py ' + ${env.db_creds_USR} + ' ' + ${env.db_creds_PSW}
-            }
-        }
         stage('Backend testing') {
             steps {
                 bat 'python backend_testing.py'
