@@ -3,6 +3,9 @@
 # Libraries: requests, json, time, pymsysql
 import requests, json, time, pymysql, sys
 
+# user_db = str(sys.argv[1])
+# passwd_db = str(sys.argv[2])
+
 # User_name and ID variables to change for testing
 user_name = "johnny"
 user_id = 2
@@ -22,10 +25,8 @@ tempdict = json.loads(json.dumps(res.json()))
 # Check if both the status code is 200, and user_name from response equals to initial user_name, if so continue test
 if res.status_code == 200 and tempdict["user_name"] == user_name:
     # schema_name = 'freedb_moshe123'
-    user_db = str(sys.argv[1])
-    passwd_db = str(sys.argv[2])
     # Establishing a connection to DB
-    conn = pymysql.connect(host='sql.freedb.tech', port=3306, user=user_db, passwd=passwd_db, db='freedb_moshe123')
+    conn = pymysql.connect(host='sql.freedb.tech', port=3306, user=str(sys.argv[1]), passwd=str(sys.argv[2]), db='freedb_moshe123')
     conn.autocommit(True)
     cursor = conn.cursor()
     # Execute command in DB to retrieve user_name from DB and compare to initial user_name
