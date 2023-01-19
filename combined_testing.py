@@ -25,7 +25,6 @@ res = requests.get('http://127.0.0.1:5000/users/'+str(user_id))
 tempdict = json.loads(json.dumps(res.json()))
 # Check if both the status code is 200, and user_name from response equals to initial user_name, if so continue test
 if res.status_code == 200 and tempdict["user_name"] == user_name:
-    # schema_name = 'freedb_moshe123'
     # Establishing a connection to DB
     conn = pymysql.connect(host='sql.freedb.tech', port=3306, user='freedb_moshez', passwd='BF%SNrp8#c7k4Fs',
                                db='freedb_moshe123')
@@ -36,12 +35,21 @@ if res.status_code == 200 and tempdict["user_name"] == user_name:
     result = str(cursor.fetchone())
     result.strip("(',)")
     conn.close()
-    # If the retrieved user_name from DB equals the initial user_name, print message
+    # If the retrieved user_name from DB equals the initial user_name, print message, start selenium test
     if result.strip("(',)") == user_name:
-        print("Everything ok")
+        print("Everything ok, starting Selenium test")
+        driver = webdriver.Chrome(service=Service("C:\ChromeDriver\chromedriver.exe"))
+        # Driver navigates to url and providing ID value
+        driver.get("http://127.0.0.1:5001/users/get_user_data/"+str(user_id))
+        # Try to find element by ID "user", if succeeded, print the user_name
+        if driver.find_element(By.ID, value="user").text == user_name:
+            print("Selenium test finished successfully")
+        # If failed above attempt, raise "test failed" error
+        else:
+            raise Exception("Last step failed - WebAPI did not return correct username")
     # If above condition not met, print reason for failure
     else:
-        print("Failed last step - user_name in DB does not match initial user_name")
+        print("Failed step - user_name in DB does not match initial user_name")
         raise Exception("test failed")
 else:
     print("Failed step - HTTP code not 200 / Response user_name does not match intial user_name")

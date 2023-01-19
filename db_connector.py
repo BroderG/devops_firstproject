@@ -7,8 +7,6 @@ from datetime import datetime
 # Assign the current time to "now" variable
 now = datetime.now()
 
-# users = {}    # DELETE??
-
 # A function to retrieve the user_name from the DB by it's ID
 def get_name(user_id):
     # schema_name = 'freedb_moshe123'  # DELETE?
@@ -23,6 +21,7 @@ def get_name(user_id):
     result = str(cursor.fetchone())
     # Return the result, after stripping it from any special characters
     return(result.strip("(',)"))
+    cursor.close()
     conn.close()
 
 # A function to add a user_name to the DB with provided user_name and ID
@@ -74,7 +73,6 @@ def add_user(user_id, username):
 
 # A function to update a user_name to the DB with provided user_name and ID
 def update_user(user_id, username):
-    # schema_name = 'freedb_moshe123'  # DELETE?
     conn = pymysql.connect(host='sql.freedb.tech', port=3306, user='freedb_moshez', passwd='BF%SNrp8#c7k4Fs', db='freedb_moshe123')
     conn.autocommit(True)
     cursor = conn.cursor()
@@ -100,6 +98,8 @@ def update_user(user_id, username):
     # If ID does not exist, return 0 to initiate error response
     else:
         return 0
+    cursor.close()
+    conn.close()
 
 # A function to delete a user from the DB by provided ID
 def delete_user(user_id):
@@ -129,3 +129,6 @@ def delete_user(user_id):
     # If ID does not exist, return 0 to initiate error response
     else:
         return 0
+
+    cursor.close()
+    conn.close()

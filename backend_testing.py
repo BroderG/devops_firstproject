@@ -32,6 +32,7 @@ if res.status_code == 200 and tempdict["user_name"] == user_name:
     cursor.execute("SELECT user_name FROM freedb_moshe123.users WHERE (`user_id` = '" + str(user_id) + "');")
     result = str(cursor.fetchone())
     result.strip("(',)")
+    cursor.close()
     conn.close()
     # If the retrieved user_name from DB equals the initial user_name, print message
     if result.strip("(',)") == user_name:
