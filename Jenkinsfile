@@ -2,17 +2,19 @@ pipeline {
     agent any
     environment {
         db_creds = credentials('sql_user_pass')
+        db_user = $db_creds_USR
+        db_pass = $db_creds_PSW
     }
     stages {
         stage('run backend server') {
             steps {
                 echo $db_creds_USR
-                bat 'start /min python rest_app.py ' + $db_creds_USR + ' ' + $db_creds_PSW
+                bat 'start /min python rest_app.py ' + db_user + ' ' + db_pass
             }
         }
         stage('run frontend server') {
             steps {
-                bat 'start /min python web_app.py ' + $db_creds_USR + ' ' + $db_creds_PSW
+                bat 'start /min python web_app.py ' + db_user + ' ' + db_pass
             }
         }
         stage('Backend testing') {
