@@ -11,6 +11,13 @@ pipeline {
                 }
             }
         }
+        stage('run frontend server') {
+            steps {
+                withCredentials([usernameColonPassword(credentialsId: 'sql_user_pass', variable: 'db_creds')]) {
+                bat 'start /min python web_app.py ' + "$db_creds_USR" + ' ' + "$db_creds_PSW"
+                }
+            }
+        }
         stage('Backend testing') {
             steps {
                 bat 'python backend_testing.py'
