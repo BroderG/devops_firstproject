@@ -10,7 +10,7 @@ now = datetime.now()
 user = str(sys.argv[1])
 passwd = str(sys.argv[2])
 
-# A function to retrieve the user_name from the DB by it's ID
+# A function to retrieve the user_name from the DB by ID
 def get_name(user_id):
     # Establishing a connection to DB
     conn = pymysql.connect(host='sql.freedb.tech', port=3306, user=user, passwd=passwd, db='freedb_moshe123')
@@ -44,7 +44,7 @@ def add_user(user_id, username):
     for row in cursor:
         for i in row:
             try:
-                # Try to assign current position's character to int, if successful, append the int to "data" dictionary, then break the loop
+                # Assign current position's character to int, if successful, append the int to "data" dictionary, then break the loop
                 resu = int(i)
                 data.append(resu)
                 break
