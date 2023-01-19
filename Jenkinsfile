@@ -6,12 +6,12 @@ pipeline {
     stages {
         stage('run backend server') {
             steps {
-                bat("start /min python rest_app.py " + $db_creds_USR.toString() + " " + $db_creds_PSW.toString())
+                bat("start /min python rest_app.py " + $db_creds + " " + $db_creds_PSW)
             }
         }
         stage('run frontend server') {
             steps {
-                bat("start /min python web_app.py " + $db_creds_USR.toString() + " " + $db_creds_PSW.toString())
+                bat("start /min python web_app.py " + $db_creds + " " + $db_creds_PSW)
             }
         }
         stage('Backend testing') {
