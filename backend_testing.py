@@ -1,8 +1,10 @@
 # Backend testing script
 
 # Libraries: requests, json, time, pymsysql
-import requests, json, time, pymysql
+import requests, json, time, pymysql, sys
 
+user = str(sys.argv[1])
+passwd = str(sys.argv[2])
 
 # User_name and ID variables to change for testing
 user_name = "johnny"
@@ -24,7 +26,7 @@ tempdict = json.loads(json.dumps(res.json()))
 if res.status_code == 200 and tempdict["user_name"] == user_name:
     # schema_name = 'freedb_moshe123'
     # Establishing a connection to DB
-    conn = pymysql.connect(host='sql.freedb.tech', port=3306, user='freedb_moshez', passwd='BF%SNrp8#c7k4Fs',
+    conn = pymysql.connect(host='sql.freedb.tech', port=3306, user=user, passwd=passwd,
                                db='freedb_moshe123')
     conn.autocommit(True)
     cursor = conn.cursor()
