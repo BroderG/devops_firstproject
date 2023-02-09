@@ -1,15 +1,17 @@
  pipeline {
+    agent any
     environment {
     registry = "gold3h/guy_repo"
     registryCredential = credentials('docker_hub')
     dockerImage = '‘'
   }
+  stages {
         stage('build and push image') {
             steps {
                script {
                     dockerImage = docker.build registry + ":$BUILD_NUMBER"
                     docker.withRegistry('', registryCredential) {
-                    dockerImage.push() // push image to hub
+                    dockerImage.push()
                 }
             }
         }
