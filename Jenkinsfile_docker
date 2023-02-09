@@ -2,7 +2,7 @@
     environment {
     registry = "gold3h/guy_repo"
     registryCredential = credentials('docker_hub')
-    dockerImage = '‘ // will be overridden later
+    dockerImage = '‘' // will be overridden later
   }
         stage('build and push image') {
             steps {
