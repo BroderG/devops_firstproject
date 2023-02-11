@@ -16,9 +16,11 @@ pipeline {
                 }
             }
         }
-        post {
-            always {
-                bat "docker rmi %registry%:%BUILD_NUMBER%"
+        stage('Remove Image') {
+            post {
+                always {
+                    bat "docker rmi %registry%:%BUILD_NUMBER%"
+                }
             }
         }
     }
