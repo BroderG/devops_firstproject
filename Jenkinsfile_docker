@@ -3,7 +3,7 @@ pipeline {
     environment {
         registry = "gold3h/guy_repo"
         registryCredential = 'docker_hub'
-        dockerImage = ''
+        dockerImage = 'devops_proj_image'
     }
     stages {
         stage('Build and Push Image') {
