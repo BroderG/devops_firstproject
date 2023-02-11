@@ -2,7 +2,7 @@ pipeline {
     agent { dockerfile true }
     environment {
         registry = "gold3h/guy_repo"
-        registryCredential = credentials('docker_hub')
+        registryCredential = 'docker_hub'
         dockerImage = ''
     }
     stages {
