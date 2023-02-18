@@ -9,7 +9,7 @@ pipeline {
         stage('Build and Push Image') {
             steps {
                 script {
-                    dockerImage = docker.build(registry + ":%BUILD_NUMBER%")
+                    dockerImage = docker.build("%registry%:%BUILD_NUMBER%")
                     withDockerRegistry(credentialsId: 'docker_hub') {
                         dockerImage.push()
                     }
