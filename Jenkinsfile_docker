@@ -4,18 +4,18 @@ pipeline {
         registry = "gold3h/guy_repo"
         registryCredential = 'docker_hub'
         dockerImage = 'devops_proj_image'
-	stages {
-    stage('Build and Push Image') {
-        steps {
-            script {
-                dockerImage = docker.build(registry + ":%BUILD_NUMBER%")
-                withDockerRegistry(credentialsId: 'docker_hub') {
+    }
+    stages {
+        stage('Build and Push Image') {
+            steps {
+                script {
+                    dockerImage = docker.build registry + ":$BUILD_NUMBER“
+                    docker.withRegistry('', registryCredential) {
                     dockerImage.push()
                     }
                 }
             }
         }
-    }
     }
     post {
         always {
