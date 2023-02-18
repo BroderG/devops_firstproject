@@ -1,6 +1,6 @@
 FROM python:3.8-alpine
 WORKDIR /app
-COPY rest_app.py /app
+COPY rest_app.py
 RUN pip install flask
 EXPOSE 5000
 VOLUME /app/logs
