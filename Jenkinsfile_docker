@@ -1,25 +1,24 @@
 pipeline {
-    agent { dockerfile true }
+    agent any
     environment {
         registry = credentials('docker_hub_registry')
         registryCredential = credentials('docker_hub')
-        dockerImage = ''
     }
     stages {
-        stage('Build and Push Image') {
+        stage('Build Docker Image') {
             steps {
-                script {
-                    dockerImage = docker.build(registry + ":%BUILD_NUMBER%")
-                    docker.withRegistry('https://registry.hub.docker.com', registryCredential) {
-                        dockerImage.push()
-                    }
-                }
+                bat 'docker build -t %registry%:%BUILD_NUMBER% .'
+            }
+        }
+        stage('Clean environment') {
+            steps {
+                bat 'python clean_environment.py'
             }
         }
     }
-    post {
-        always {
-            bat "docker rmi %registry%:%BUILD_NUMBER%"
-            }
-        }
+        post{
+         always{
+         bat "docker rmi %registry%:%BUILD_NUMBER%"
+         }
+     }
 }
