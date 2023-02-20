@@ -12,7 +12,7 @@ pipeline {
         }
 		stage('Push Docker Image to Hub') {
             steps {
-                bat 'docker %BUILD_NUMBER% %registry% %registry%'
+                bat 'docker %registry% %registry%'
 		bat 'docker push %registry%'
             }
         }
