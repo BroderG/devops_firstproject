@@ -1,9 +1,9 @@
 pipeline {
     agent { dockerfile true }
     environment {
-        registry = "gold3h/guy_repo"
-        registryCredential = 'docker_hub'
-        dockerImage = 'devops_proj_image'
+        registry = credentials('docker_hub_registry')
+        registryCredential = credentials('docker_hub')
+        dockerImage = ''
     }
     stages {
         stage('Build and Push Image') {
