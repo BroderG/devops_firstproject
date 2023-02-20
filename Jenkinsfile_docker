@@ -5,6 +5,11 @@ pipeline {
         registryCredential = credentials('docker_hub')
     }
     stages {
+	    stage('Run Docker and login') {
+            steps {
+                bat 'docker run'
+            }
+        }
         stage('Build Docker Image') {
             steps {
                 bat 'docker build -t %registry%:%BUILD_NUMBER% .'
