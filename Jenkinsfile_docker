@@ -10,10 +10,9 @@ pipeline {
                 bat 'docker build -t %registry%:%BUILD_NUMBER% .'
             }
         }
-		stage('Push Docker Image to Hub') {
+	stage('Push Docker Image to Hub') {
             steps {
-                bat 'docker %registry% %registry%'
-		bat 'docker push %registry%'
+		bat 'docker push %registry%:%BUILD_NUMBER%'
             }
         }
         stage('Clean environment') {
@@ -22,5 +21,9 @@ pipeline {
             }
         }
     }
-
+        post{
+         always{
+         bat "docker rmi %registry%:%BUILD_NUMBER%"
+         }
+     }
 }
