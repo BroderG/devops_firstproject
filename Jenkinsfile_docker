@@ -12,6 +12,7 @@ pipeline {
         }
 	stage('Push Docker Image to Hub') {
             steps {
+		bat 'docker login -u %registryCredential_USR% -p %registryCredential_PSW%'
 		bat 'docker push %registry%:%BUILD_NUMBER%'
             }
         }
