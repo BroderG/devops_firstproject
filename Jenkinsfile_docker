@@ -16,8 +16,19 @@ pipeline {
 		bat 'docker push %registry%:%BUILD_NUMBER%'
             }
         }
+	stage('Set version') {
+            steps {
+                bat "(echo VERSION=%BUILD_NUMBER% & echo REGISTRY=%registry%) > .env"
+            }
+        }
+	stage('Docker compose up') {
+            steps {
+                bat "docker-compose up -d"
+            }
+        }
         stage('Clean environment') {
             steps {
+			    bat 'docker-compose down'
                 bat 'python clean_environment.py'
             }
         }
