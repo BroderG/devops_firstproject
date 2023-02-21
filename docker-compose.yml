@@ -1,0 +1,6 @@
+version: ${VERSION}
+services:
+  rest_app:
+    image: "${REGISTRY}:${VERSION}"
+    ports:
+     - "5000:5000"
