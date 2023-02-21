@@ -28,7 +28,7 @@ pipeline {
         }
         stage('Clean environment') {
             steps {
-			    bat 'docker-compose down'
+		bat 'docker-compose down'
                 bat 'python clean_environment.py'
             }
         }
