@@ -30,6 +30,6 @@ def invalid_route(e):
 # host is pointing at local machine address
 # debug is used for more detailed logs + hot swaping
 # the desired port - feel free to change
-app.run(host='127.0.0.1', debug=True, port=5001)
+app.run(host='0.0.0.0', debug=True, port=5001)
 
 
