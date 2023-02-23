@@ -43,6 +43,11 @@ pipeline {
                 bat "docker-compose up -d"
             }
         }
+	stage('Dockerized app backend testing') {
+            steps {
+                bat 'start /min python docker_backend_testing.py "%db_creds_USR%" "%db_creds_PSW%"'
+            }
+        }
         stage('Clean Docker environment') {
             steps {
 		bat 'docker-compose down'
