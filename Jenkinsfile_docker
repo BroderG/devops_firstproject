@@ -3,10 +3,27 @@ pipeline {
     environment {
         registry = credentials('docker_hub_registry')
         registryCredential = credentials('docker_hub')
+	db_creds = credentials('sql_user_pass')
     }
     stages {
-        stage('Build Docker Image') {
+        stage('Run backend server') {
             steps {
+                bat 'start /min python rest_app.py "%db_creds_USR%" "%db_creds_PSW%"'
+            }
+        }
+	stage('Backend testing') {
+            steps {
+                bat 'start /min python backend_testing.py "%db_creds_USR%" "%db_creds_PSW%"'
+            }
+        }
+	stage('Clean environment') {
+            steps {
+                bat 'python clean_environment.py'
+            }
+        }
+        stage('Build Docker Image and append CMD to Dockerfile') {
+            steps {
+	        bat "echo CMD python3 rest_app.py %db_creds_USR% %db_creds_PSW%>> Dockerfile"
                 bat 'docker build -t %registry%:%BUILD_NUMBER% .'
             }
         }
