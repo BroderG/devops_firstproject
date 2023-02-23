@@ -43,7 +43,7 @@ pipeline {
                 bat "docker-compose up -d"
             }
         }
-        stage('Clean environment') {
+        stage('Clean Docker environment') {
             steps {
 		bat 'docker-compose down'
                 bat 'python clean_environment.py'
