@@ -4,4 +4,3 @@ COPY rest_app.py db_connector.py /app
 RUN pip install flask pymysql datetime
 EXPOSE 5000
 VOLUME /app/logs
-CMD python3 rest_app.py freedb_moshez BF%SNrp8#c7k4Fs
