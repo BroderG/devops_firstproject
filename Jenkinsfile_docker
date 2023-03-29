@@ -54,6 +54,18 @@ pipeline {
                 bat 'python clean_environment.py'
             }
         }
+	stage('Install Helm chart and write service URL') {
+            steps {
+		bat 'helm install guy-projecthelmchart ProjectHelmChart --set image.tag=%BUILD_NUMBER%  --set image.repository=%registry%'
+		bat 'minikube service guy-projecthelmchart-service –url > k8s_url.txt'
+		bat 'type k8s_url.txt'
+            }
+        }
+	stage('Delete Helm chart') {
+            steps {
+		bat 'helm delete guy-projecthelmchart'
+            }
+        }
     }
         post{
          always{
