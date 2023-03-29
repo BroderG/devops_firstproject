@@ -1,0 +1,12 @@
+replicaCount: 5
+
+image:
+  repository: ""
+  tag: ""
+  pullPolicy: Always
+  
+service:
+    type: LoadBalancer
+
+ports:
+  port: 5000
