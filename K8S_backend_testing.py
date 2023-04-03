@@ -28,7 +28,7 @@ if tempdict["status"] == "error":
     print("User ID was taken, instead assigned to a different ID. The new ID: "+str(user_id))
 # Wait 1 second, then send a get request and save response to "res" variable
 time.sleep(1)
-res = requests.get(url+'/users/'/users/'+str(user_id))
+res = requests.get(url+'/users/'+str(user_id))
 # Assign a dictionary, by loading the json response and converting it
 tempdict = json.loads(json.dumps(res.json()))
 # Check if both the status code is 200, and user_name from response equals to initial user_name, if so continue test
