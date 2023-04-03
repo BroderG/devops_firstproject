@@ -61,6 +61,11 @@ pipeline {
 		bat 'type k8s_url.txt'
             }
         }
+	stage('Test K8S app') {
+            steps {
+                bat 'python K8S_backend_testing.py'
+            }
+        }
 	stage('Delete Helm chart') {
             steps {
 		bat 'helm delete guy-projecthelmchart'
