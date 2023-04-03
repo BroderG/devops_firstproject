@@ -63,7 +63,7 @@ pipeline {
         }
 	stage('Test K8S app') {
             steps {
-                bat 'python K8S_backend_testing.py'
+                bat 'python K8S_backend_testing.py "%db_creds_USR%" "%db_creds_PSW%"'
             }
         }
 	stage('Delete Helm chart') {
